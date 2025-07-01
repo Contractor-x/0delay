@@ -57,7 +57,7 @@ jobs:
         flake8 cmd/0delay-cli/0delay.py
 
     - name: Upload build artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: binaries
         path: bin/
