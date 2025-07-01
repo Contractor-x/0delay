@@ -39,6 +39,9 @@ jobs:
         cd cmd/0delay-gui
         go mod tidy
 
+    - name: Install GUI build dependencies
+      run: sudo apt-get update && sudo apt-get install -y libgl1-mesa-dev xorg-dev pkg-config
+
     - name: Build Go GUI app
       run: |
         cd cmd/0delay-gui
