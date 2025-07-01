@@ -1,4 +1,19 @@
-# 0delay
+```text
+    .n~~%x.      dF                    x .d88"                ..         
+  x88X   888.   '88bu.                  5888R                @L          
+ X888X   8888L  '*88888bu        .u     '888R         u     9888i   .dL  
+X8888X   88888    ^"*8888N    ud8888.    888R      us888u.  `Y888k:*888. 
+88888X   88888X  beWE "888L :888'8888.   888R   .@88 "8888"   888E  888I 
+88888X   88888X  888E  888E d888 '88%"   888R   9888  9888    888E  888I 
+88888X   88888f  888E  888E 8888.+"      888R   9888  9888    888E  888I 
+48888X   88888   888E  888F 8888L        888R   9888  9888    888E  888I 
+ ?888X   8888"  .888N..888  '8888c. .+  .888B . 9888  9888   x888N><888' 
+  "88X   88*`    `"888*""    "88888%    ^*888%  "888*""888"   "88"  888  
+    ^"==="`         ""         "YP'       "%     ^Y"   ^Y'          88F  
+                                                                   98"   
+                                                                 ./"     
+                                                                ~`       
+```
 
 ## Overview
 
@@ -63,6 +78,7 @@ python3 cmd/0delay-cli/0delay.py
 ```
 
 - On startup, the current username (if any) will be displayed.
+- The saved username will be displayed.
 - You will be prompted to enter or select a target in `username@ip` or IP format.
 - You can select or add PEM keys by friendly names.
 - The app checks username uniqueness with Supabase and registers silently.
@@ -94,3 +110,6 @@ Contributions are welcome. Please open issues or pull requests on GitHub.
 ## License
 
 This project is licensed under the MIT License.
+
+## Creators
+- (C0NTRACT0R)[https://github.com/Contractor-x/]
