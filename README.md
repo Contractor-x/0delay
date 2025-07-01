@@ -62,6 +62,12 @@ Run the terminal app:
 python3 cmd/0delay-cli/0delay.py
 ```
 
+- On startup, the current username (if any) will be displayed.
+- You will be prompted to enter or select a target in `username@ip` or IP format.
+- You can select or add PEM keys by friendly names.
+- The app checks username uniqueness with Supabase and registers silently.
+- Transfer history and keys are saved for easy reuse.
+
 Follow the prompts to configure and send files.
 
 ### GUI App
@@ -72,7 +78,14 @@ Run the GUI app:
 ./bin/0delay-gui
 ```
 
+- The current username is displayed on entry.
+- You can register a new username with uniqueness check.
+- Select targets, PEM keys, and files via GUI.
+- Transfer history and keys are saved in config.
+- Receive files with notifications and prompts.
+
 Use the graphical interface to send and receive files.
+
 
 ## Contributing
 
