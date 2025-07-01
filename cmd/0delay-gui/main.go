@@ -280,6 +280,114 @@ func main() {
         log.Println("Error loading .env file:", err)
     }
 
+    supabaseURL := os.Getenv("SUPABASE_URL")
+    supabaseAnonKey := os.Getenv("SUPABASE_ANON_KEY")
+
+    config, err := loadConfig()
+    if err != nil {
+        log.Println("Error loading config:", err)
+        config = &Config{
+            PemKeys: make(map[string]string),
+        }
+    }
+
+    a := app.New()
+    w := a.NewWindow("0delay - Linux Transfer System")
+
+    // Show username if available
+    usernameLabel := widget.NewLabel("")
+    if config != nil && config.LastTarget != "" {
+        usernameLabel.SetText("Current username: " + config.LastTarget)
+    }
+
+    ipEntry := widget.NewEntry()
+    ipEntry.SetPlaceHolder("Enter public IP")
+
+    pemEntry := widget.NewEntry()
+    pemEntry.SetPlaceHolder("Enter path to .pem key")
+
+    passwordEntry := widget.NewPasswordEntry()
+    passwordEntry.SetPlaceHolder("Enter password (optional)")
+
+    fileLabel := widget.NewLabel("No file selected")
+    var selectedFile string
+
+    fileButton := widget.NewButton("Select File", func() {
+        fd := dialog.NewFileOpen(func(reader fyne.URIReadCloser, err error) {
+            if err == nil && reader != nil {
+                selectedFile = reader.URI().Path()
+                fileLabel.SetText(selectedFile)
+            }
+        }, w)
+        fd.Show()
+    })
+
+    sendButton := widget.NewButton("Send File", func() {
+        if ipEntry.Text == "" || pemEntry.Text == "" || selectedFile == "" {
+            dialog.ShowInformation("Error", "Please fill all fields and select a file", w)
+            return
+        }
+        // TODO: Implement sending file over TCP with encryption and Hamming code
+        dialog.ShowInformation("Info", "Send functionality not yet implemented", w)
+    })
+
+    incomingLabel := widget.NewLabel("No incoming transfers")
+
+    // Username registration section
+    usernameEntry := widget.NewEntry()
+    usernameEntry.SetPlaceHolder("Enter new username")
+
+    registerButton := widget.NewButton("Register Username", func() {
+        username := usernameEntry.Text
+        if username == "" {
+            dialog.ShowInformation("Error", "Please enter a username", w)
+            return
+        }
+        // Check if username exists
+        exists, err := checkUsernameExists(supabaseURL, supabaseAnonKey, username)
+        if err != nil {
+            dialog.ShowInformation("Error", fmt.Sprintf("Failed to check username: %v", err), w)
+            return
+        }
+        if exists {
+            dialog.ShowInformation("Error", "Username already exists. Please choose another.", w)
+            return
+        }
+        // Register username silently
+        err = registerUsernameSilent(supabaseURL, supabaseAnonKey, username)
+        if err != nil {
+            dialog.ShowInformation("Error", fmt.Sprintf("Failed to register username: %v", err), w)
+        } else {
+            dialog.ShowInformation("Success", "Username registered successfully", w)
+            usernameLabel.SetText("Current username: " + username)
+        }
+    })
+
+    content := container.NewVBox(
+        widget.NewLabel("0delay - Linux Transfer System (GUI)"),
+        usernameLabel,
+        usernameEntry,
+        registerButton,
+        ipEntry,
+        pemEntry,
+        passwordEntry,
+        fileButton,
+        fileLabel,
+        sendButton,
+        widget.NewLabel("Incoming Transfers:"),
+        incomingLabel,
+    )
+
+    w.SetContent(content)
+    w.Resize(fyne.NewSize(400, 480))
+
+    var wg sync.WaitGroup
+    wg.Add(1)
+    go startListener(w, &wg)
+
+    w.ShowAndRun()
+    wg.Wait()
+}
 
 func registerUsername(supabaseURL, anonKey, username, ip string) error {
     type UserRecord struct {

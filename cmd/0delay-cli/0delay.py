@@ -36,14 +36,50 @@ def load_config():
             return json.load(f)
     return {}
 
+import requests
+
+def check_username_exists(supabase_url, anon_key, username):
+    url = f"{supabase_url}/rest/v1/usernames?username=eq.{username}"
+    headers = {
+        "apikey": anon_key,
+        "Authorization": f"Bearer {anon_key}",
+        "Content-Type": "application/json",
+    }
+    response = requests.get(url, headers=headers)
+    if response.status_code == 200:
+        data = response.json()
+        return len(data) > 0
+    else:
+        print(f"Failed to check username: {response.text}")
+        return False
+
 def prompt_for_config():
     print(ASCII_ART)
     config = load_config()
+
+    # Load Supabase config from environment variables
+    supabase_url = os.getenv("SUPABASE_URL")
+    supabase_anon_key = os.getenv("SUPABASE_ANON_KEY")
 
     # Show username if available
     username = config.get("username")
     if username:
         print(f"Current username: {username}")
+    else:
+        # Prompt user to create username
+        while True:
+            new_username = input("Enter a username to register: ").strip()
+            if not new_username:
+                print("Username cannot be empty.")
+                continue
+            if check_username_exists(supabase_url, supabase_anon_key, new_username):
+                print("Username already exists. Please choose another.")
+            else:
+                username = new_username
+                # Register username silently (function to be implemented)
+                register_username_silent(supabase_url, supabase_anon_key, username)
+                print(f"Username '{username}' registered successfully.")
+                break
 
     print("Welcome to 0delay - Linux Transfer System")
 
@@ -66,9 +102,9 @@ def prompt_for_config():
 
     # Parse target into username and ip
     if "@" in target:
-        username, public_ip = target.split("@", 1)
+        target_username, public_ip = target.split("@", 1)
     else:
-        username = None
+        target_username = None
         public_ip = target
 
     # Select or add pem key
@@ -109,6 +145,23 @@ def prompt_for_config():
     save_config(config)
 
     return config
+
+def register_username_silent(supabase_url, anon_key, username):
+    # Function to register username silently without alarming user
+    url = f"{supabase_url}/rest/v1/usernames"
+    headers = {
+        "apikey": anon_key,
+        "Authorization": f"Bearer {anon_key}",
+        "Content-Type": "application/json",
+        "Prefer": "return=representation",
+    }
+    data = [{"username": username}]
+    try:
+        response = requests.post(url, json=data, headers=headers)
+        if response.status_code not in (200, 201):
+            print(f"Failed to register username: {response.text}")
+    except Exception as e:
+        print(f"Exception during username registration: {e}")
 
 def pick_file():
     print("\nPlease enter the full path of the file you want to send:")
