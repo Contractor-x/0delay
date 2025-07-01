@@ -112,4 +112,4 @@ Contributions are welcome. Please open issues or pull requests on GitHub.
 This project is licensed under the MIT License.
 
 ## Creators
-- (C0NTRACT0R)[https://github.com/Contractor-x/]
+- [C0NTRACT0R](https://github.com/Contractor-x/)
