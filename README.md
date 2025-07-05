@@ -17,7 +17,7 @@ X8888X   88888    ^"*8888N    ud8888.    888R      us888u.  `Y888k:*888.
 
 ## Overview
 
-0delay is a Linux-based file transfer system that supports both terminal (CLI) and GUI applications. It provides secure, encrypted file transfers with error correction and user-friendly interfaces.
+**0delay** is a Linux-based file transfer system that supports both terminal (CLI) and GUI applications. It provides secure, encrypted file transfers with error correction and user-friendly interfaces.
 
 ## Features
 
