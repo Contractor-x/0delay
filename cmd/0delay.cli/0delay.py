@@ -43,7 +43,7 @@ def load_config():
 
 def prompt_for_config():
     print(ASCII_ART)
-    print("Welcome to 0delay - Linux Transfer System")
+    print("Welcome to 0Delay - Linux based Transfer System")
     config = load_config()
     if "public_ip" in config:
         print(f"Current saved public IP: {config['public_ip']}")
