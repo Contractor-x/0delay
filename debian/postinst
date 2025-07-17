@@ -1,0 +1,18 @@
+#!/bin/bash
+set -e
+
+# Create virtual environment in /opt/0delay-cli
+python3 -m venv /opt/0delay-cli/venv
+
+# Activate venv and install requirements
+source /opt/0delay-cli/venv/bin/activate
+pip install --upgrade pip
+pip install paramiko cryptography python-dotenv supabase
+
+# Copy CLI script to /opt/0delay-cli
+cp /usr/share/0delay-cli/0delay.py /opt/0delay-cli/0delay.py
+
+# Create symlink for easy access
+ln -sf /opt/0delay-cli/0delay.py /usr/local/bin/0delay-cli
+
+echo "0delay-cli installed successfully."

@@ -1,0 +1,9 @@
+Package: 0delay-cli
+Version: 1.0.0
+Section: utils
+Priority: optional
+Architecture: all
+Depends: python3, python3-pip, python3-venv
+Maintainer: C0NTRACT0R <dada4ash@gmail.com>
+Description: 0Delay CLI - Linux file transfer tool with Supabase integration and encryption
+ A command-line tool for secure file transfer between Linux systems and EC2 servers.

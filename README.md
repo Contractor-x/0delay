@@ -46,26 +46,15 @@ For
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/Contractor-x/0delay.git
-cd 0delay
+sudo dpkg -i 0delay-cli-1.0.0.deb
 ```
 
-2. Configure Supabase credentials:
+The CLI tool will be installed to `/opt/0delay-cli` with a symlink `/usr/local/bin/0delay-cli`.
 
-Edit `configs/.env` and set your Supabase project URL and anon key.
-
-3. Install Python dependencies:
+Run the tool with:
 
 ```bash
-pip install -r requirements.txt
-```
-
-4. Build the Go GUI app:
-
-```bash
-cd cmd/0delay-gui
-go mod tidy
-go build -o ../../bin/0delay-gui
+0delay-cli
 ```
 
 ## Usage
