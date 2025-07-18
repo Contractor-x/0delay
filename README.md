@@ -31,7 +31,7 @@ X8888X   888888    ^"*8888N    ud8888.    888R      us888u.  `Y888k:*888.
 - GitHub Actions CI/CD
 
 ## Installation
-For installation kindly follow the steps
+For installation kindly follow the steps provided
 
 ### Prerequisites
 
