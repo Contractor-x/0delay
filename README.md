@@ -22,7 +22,6 @@ X8888X   888888    ^"*8888N    ud8888.    888R      us888u.  `Y888k:*888.
 ## Features
 
 - Terminal CLI app written in Python
-- GUI app written in Go using Fyne framework
 - End-to-end encryption with password protection
 - Hamming code error correction for reliable transfers
 - SSH-based file sending for CLI app
