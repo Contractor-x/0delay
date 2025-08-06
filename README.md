@@ -89,7 +89,6 @@ Run the GUI app:
 - Transfer history and keys are saved in config.
 - Receive files with notifications and prompts.
 
-Use the graphical interface to send and receive files.
 
 
 ## Contributing
