@@ -77,7 +77,6 @@ Follow the prompts to configure and send files.
 
 
 
-
 - The current username is displayed on entry.
 - You can register a new username with uniqueness check.
 - Select targets, PEM keys, and files via GUI.
