@@ -76,7 +76,7 @@ Follow the prompts to configure and send files.
 
 ### GUI App
 
-Run 
+
 
 
 
