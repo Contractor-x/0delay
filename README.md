@@ -34,8 +34,7 @@ For installation kindly follow the steps provided
 
 ### Prerequisites
 
-- Python 3.x
-- Go 1.20 or later
+- Python 3.1
 - Linux operating system
 - SSH access and .pem key for remote machines
 - Supabase account and project for username management
