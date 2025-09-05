@@ -79,8 +79,6 @@ Follow the prompts to configure and send files.
 Run the GUI app:
 
 ```bash
-./bin/0delay-gui
-```
 
 - The current username is displayed on entry.
 - You can register a new username with uniqueness check.
