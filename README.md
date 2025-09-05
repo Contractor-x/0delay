@@ -78,7 +78,7 @@ Follow the prompts to configure and send files.
 
 Run the GUI app:
 
-```bash
+
 
 - The current username is displayed on entry.
 - You can register a new username with uniqueness check.
